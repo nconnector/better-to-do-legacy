@@ -1,22 +1,65 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="row">
+      <Nav />
+    </div>
+    <div class="row main">
+      <transition name="active">
+        <Sidebar v-if="showSidebar" />
+      </transition>
+      <component :is="mainContentComponent" />
+    </div>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import Vue from 'vue';
+import Nav from './components/Nav.vue';
+import Sidebar from './components/Sidebar.vue';
+import ToDo from './components/ToDo/ToDo.vue';
+import Notes from './components/Notes/Notes.vue';
 
-export default {
+export default Vue.extend({
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Nav,
+    Sidebar,
+    ToDo,
+    Notes,
+  },
+  data () {
+    return {
+      showSidebar: false,
+    };
+  },
+  computed: {
+      mainContentComponent() {
+        switch(this.$store.state.currentView) {
+          case 'to-do':
+            return ToDo;
+          case 'notes':
+            return Notes;
+          default:
+            return ToDo;
+        }
+      },
+  },
+  mounted () {
+    this.$root.$on('toggleSidebar', () => {
+      this.showSidebar = !this.showSidebar;
+    });
+  },
+});
 </script>
 
-<style>
+<style lang="scss">
+body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,5 +67,19 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  position: relative;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  &.main {
+    height: 100%;
+  }
 }
 </style>
