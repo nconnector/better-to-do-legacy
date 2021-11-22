@@ -1,6 +1,6 @@
 <template>
   <div
-    class="draggable ticket"
+    class="draggable note"
     draggable="true"
     @dragstart="dragstart($event, item)"
     @click="$emit('click')"
@@ -9,7 +9,7 @@
     <div class="buttons">
       <div
         class="btn delete"
-        @click="$store.commit('deleteTicket', item.id)"
+        @click="$store.commit('deleteNote', item.id)"
       >
         ❌
       </div>
@@ -21,12 +21,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { Ticket } from '../../store/index';
+import { Note } from '../../store/index';
 
 export default Vue.extend({
-  name: 'TicketDraggable',
+  name: 'NoteDraggable',
   props: {
-    item: { type: Object as () => Ticket, required: true },
+    item: { type: Object as () => Note, required: true },
   },
   data () {
     return {

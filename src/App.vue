@@ -46,9 +46,12 @@ export default Vue.extend({
   },
   mounted () {
     this.$root.$on('toggleSidebar', () => {
-      this.showSidebar = !this.showSidebar;
+      this.toggleSidebar();
     });
   },
+  methods: {
+    toggleSidebar() { this.showSidebar = !this.showSidebar }
+  }
 });
 </script>
 

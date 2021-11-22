@@ -35,6 +35,7 @@ export default Vue.extend({
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(1, 1, 1, 0.3)
+  background: rgba(1, 1, 1, 0.3);
+  z-index: 1;
 }
 </style>
