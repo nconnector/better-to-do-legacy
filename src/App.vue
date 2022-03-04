@@ -5,7 +5,7 @@
     </div>
     <div class="row main">
       <transition name="active">
-        <Sidebar v-if="showSidebar" />
+        <Sidebar v-if="showSidebar" @hide-sidebar="toggleSidebar" />
       </transition>
       <component :is="mainContentComponent" />
     </div>
