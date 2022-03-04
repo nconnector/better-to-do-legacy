@@ -9,8 +9,6 @@ npm run build
 # navigate into the build output directory
 cd dist
 
-git --global config user.email "nconnector@github.com"
-git --global config user.name "nconnector"
 git init
 git add -A
 git commit -m 'deploy'
