@@ -28,8 +28,8 @@ jobs:
       - name: Run npm ci
         run: npm ci
       - name: git name
-        run: git --global config user.email "nconnector@github.com"
+        run: git config --global user.email "nconnector@github.com"
       - name: git email
-        run: git --global config user.name "nconnector"
+        run: git config --global user.name "nconnector"
       - name: Run deploy script
         run: npm run deploy
