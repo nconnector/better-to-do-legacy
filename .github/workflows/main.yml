@@ -23,13 +23,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      # Set up SSH keys
+      - uses: webfactory/ssh-agent@v0.5.4
+        with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       # Runs a single command using the runners shell
       - name: Run npm ci
         run: npm ci
-      - name: git name
-        run: git config --global user.email "nconnector@github.com"
-      - name: git email
-        run: git config --global user.name "nconnector"
+      - name: Git config author
+        run: |
+          git config --global user.email "nconnector@github.com"
+          git config --global user.name "nconnector"
       - name: Run deploy script
         run: npm run deploy
